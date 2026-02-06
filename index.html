@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Bán Hàng</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>🛒 Shop Online</h1>
+        <nav class="nav">
+            <a href="index.html" class="nav-link active">🏠 Trang chủ</a>
+            <a href="cart.html" class="nav-link">
+                🛒 Giỏ hàng
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+            </a>
+        </nav>
+    </div>
+    <p>Bán hàng đơn giản bằng HTML</p>
+</header>
+
+<main class="product-list">
+    <div class="product">
+        <img src="images/product1.jpg" alt="Áo thun nam">
+        <h3>Áo thun nam</h3>
+        <p class="price">199.000₫</p>
+        <button class="btn-primary" onclick="addToCart('Áo thun nam')">➕ Thêm vào giỏ</button>
+    </div>
+
+    <div class="product">
+        <img src="images/product2.jpg" alt="Quần jean">
+        <h3>Quần jean</h3>
+        <p class="price">299.000₫</p>
+        <button class="btn-primary" onclick="addToCart('Quần jean')">➕ Thêm vào giỏ</button>
+    </div>
+
+    <div class="product">
+        <img src="images/product3.jpg" alt="Giày thể thao">
+        <h3>Giày thể thao</h3>
+        <p class="price">499.000₫</p>
+        <button class="btn-primary" onclick="addToCart('Giày thể thao')">➕ Thêm vào giỏ</button>
+    </div>
+
+    <div class="product">
+        <img src="images/product4.jpg" alt="Áo khoác">
+        <h3>Áo khoác</h3>
+        <p class="price">599.000₫</p>
+        <button class="btn-primary" onclick="addToCart('Áo khoác')">➕ Thêm vào giỏ</button>
+    </div>
+</main>
+
+<footer>
+    © 2026 - Shop HTML cơ bản
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

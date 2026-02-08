@@ -13,7 +13,8 @@
         <h1>🛒 Shop Online</h1>
         <nav class="nav">
             <a href="index.html" class="nav-link">🏠 Trang chủ</a>
-            <a href="cart.html" class="nav-link">
+            <a href="about.html" class="nav-link">ℹ️ Giới thiệu</a>
+            <a href="order.html" class="nav-link">
                 🛒 Giỏ hàng
                 <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
@@ -323,12 +324,56 @@
         const product = products[productKey];
         const quantity = document.getElementById('qty-input').value;
         const size = document.querySelector('.size-btn.active').dataset.size;
+        const color = document.querySelector('.color-btn.active').title;
         
-        alert(`✅ Đã thêm ${quantity} x ${product.name} (Size: ${size}) vào giỏ hàng!`);
+        // Get cart from localStorage
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        
+        // Check if product already exists in cart
+        const existingItem = cart.find(item => 
+            item.productKey === productKey && item.size === size && item.color === color
+        );
+
+        if (existingItem) {
+            existingItem.quantity += parseInt(quantity);
+        } else {
+            cart.push({
+                productKey: productKey,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                size: size,
+                color: color,
+                quantity: parseInt(quantity)
+            });
+        }
+
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+
+        alert(`✅ Đã thêm ${quantity} x ${product.name} (Size: ${size}, Màu: ${color}) vào giỏ hàng!`);
     });
 
-    // Load product on page load
-    window.addEventListener('DOMContentLoaded', loadProductDetail);
+    // Update cart badge
+    function updateCartBadge() {
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badgeEl = document.getElementById('cart-count');
+        
+        if (totalItems > 0) {
+            badgeEl.style.display = 'inline';
+            badgeEl.textContent = totalItems;
+        } else {
+            badgeEl.style.display = 'none';
+        }
+    }
+
+    // Load cart on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        loadProductDetail();
+        updateCartBadge();
+    });
 </script>
 </body>
 </html>

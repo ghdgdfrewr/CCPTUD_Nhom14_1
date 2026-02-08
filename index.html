@@ -13,7 +13,8 @@
         <h1>🛒 Shop Online</h1>
         <nav class="nav">
             <a href="index.html" class="nav-link active">🏠 Trang chủ</a>
-            <a href="cart.html" class="nav-link">
+            <a href="about.html" class="nav-link">ℹ️ Giới thiệu</a>
+            <a href="order.html" class="nav-link">
                 🛒 Giỏ hàng
                 <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
@@ -69,5 +70,39 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script>
+    // Update cart badge on page load
+    function updateCartBadge() {
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badgeEl = document.getElementById('cart-count');
+        
+        if (totalItems > 0) {
+            badgeEl.style.display = 'inline';
+            badgeEl.textContent = totalItems;
+        } else {
+            badgeEl.style.display = 'none';
+        }
+    }
+
+    // Product mapping for navigation
+    const productMap = {
+        'Áo thun nam': 'ao-thun-nam',
+        'Quần jean': 'quan-jean',
+        'Giày thể thao': 'giay-the-thao',
+        'Áo khoác': 'ao-khoac'
+    };
+
+    // Navigate to product detail when "Thêm vào giỏ" is clicked
+    function addToCart(productName) {
+        const productKey = productMap[productName];
+        if (productKey) {
+            window.location.href = `product-detail.html?product=${productKey}`;
+        }
+    }
+
+    // Update badge on load
+    window.addEventListener('DOMContentLoaded', updateCartBadge);
+</script>
 </body>
 </html>

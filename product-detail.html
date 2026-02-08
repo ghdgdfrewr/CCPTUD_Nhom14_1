@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>🛒 Shop Online</h1>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">🏠 Trang chủ</a>
+            <a href="about.html" class="nav-link">ℹ️ Giới thiệu</a>
+            <a href="order.html" class="nav-link">
+                🛒 Giỏ hàng
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="product-detail-container">
+    <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <span id="breadcrumb-name">Sản phẩm</span>
+    </div>
+
+    <div class="product-detail">
+        <div class="product-image">
+            <img id="product-image" src="images/product1.jpg" alt="Sản phẩm">
+        </div>
+
+        <div class="product-info">
+            <h1 id="product-name">Sản phẩm</h1>
+            
+            <div class="product-rating">
+                <div class="stars">
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star half">★</span>
+                </div>
+                <span class="rating-text">(128 đánh giá)</span>
+            </div>
+
+            <div class="product-price">
+                <span id="product-price" class="main-price">199.000₫</span>
+                <span class="original-price">249.000₫</span>
+                <span class="discount">-20%</span>
+            </div>
+
+            <div class="product-description">
+                <h3>📝 Mô tả sản phẩm</h3>
+                <p id="product-desc">
+                    Sản phẩm chất lượng cao, được làm từ vật liệu premium, đảm bảo độ bền và thoải mái khi sử dụng. 
+                    Phù hợp cho mọi lứa tuổi, mọi mùa trong năm. Giặt máy, nhanh khô, không phai màu.
+                </p>
+            </div>
+
+            <div class="product-details">
+                <h3>📋 Chi tiết sản phẩm</h3>
+                <ul id="product-details-list">
+                    <li><strong>Chất liệu:</strong> Cotton 100%</li>
+                    <li><strong>Kích cỡ:</strong> XS, S, M, L, XL, XXL</li>
+                    <li><strong>Màu sắc:</strong> Đen, Trắng, Xanh, Đỏ</li>
+                    <li><strong>Bảo hành:</strong> 12 tháng</li>
+                    <li><strong>Giao hàng:</strong> Miễn phí toàn quốc</li>
+                </ul>
+            </div>
+
+            <div class="product-selection">
+                <div class="size-selector">
+                    <label>🏷️ <strong>Chọn kích cỡ:</strong></label>
+                    <div class="size-options">
+                        <button class="size-btn" data-size="S">S</button>
+                        <button class="size-btn" data-size="M">M</button>
+                        <button class="size-btn active" data-size="L">L</button>
+                        <button class="size-btn" data-size="XL">XL</button>
+                        <button class="size-btn" data-size="XXL">XXL</button>
+                    </div>
+                </div>
+
+                <div class="color-selector">
+                    <label>🎨 <strong>Chọn màu sắc:</strong></label>
+                    <div class="color-options">
+                        <button class="color-btn active" style="background-color: #000;" title="Đen"></button>
+                        <button class="color-btn" style="background-color: #FFF; border: 1px solid #ddd;" title="Trắng"></button>
+                        <button class="color-btn" style="background-color: #0066cc;" title="Xanh"></button>
+                        <button class="color-btn" style="background-color: #cc0000;" title="Đỏ"></button>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <label><strong>📦 Số lượng:</strong></label>
+                    <div class="quantity-control">
+                        <button id="qty-minus" class="qty-btn">−</button>
+                        <input id="qty-input" type="number" value="1" min="1">
+                        <button id="qty-plus" class="qty-btn">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-actions">
+                <button class="btn-danger" id="add-to-cart-btn">🛒 Thêm vào giỏ hàng</button>
+                <button class="btn-secondary">❤️ Yêu thích</button>
+            </div>
+
+            <div class="product-benefits">
+                <div class="benefit">
+                    <span class="benefit-icon">✅</span>
+                    <div>
+                        <strong>Chất lượng cam kết</strong>
+                        <p>Sản phẩm chính hãng 100%</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🚚</span>
+                    <div>
+                        <strong>Giao hàng nhanh</strong>
+                        <p>Giao hàng trong 2-3 ngày</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">💳</span>
+                    <div>
+                        <strong>Thanh toán an toàn</strong>
+                        <p>Mã hóa SSL 256-bit</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🔄</span>
+                    <div>
+                        <strong>Hoàn trả dễ dàng</strong>
+                        <p>30 ngày hoàn trả miễn phí</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="related-products">
+        <h2>🔗 Sản phẩm liên quan</h2>
+        <div class="related-grid">
+            <div class="product-card">
+                <img src="images/product2.jpg" alt="Quần jean">
+                <h3>Quần jean</h3>
+                <p class="price">299.000₫</p>
+                <button class="btn-primary">Xem chi tiết</button>
+            </div>
+            <div class="product-card">
+                <img src="images/product3.jpg" alt="Giày thể thao">
+                <h3>Giày thể thao</h3>
+                <p class="price">499.000₫</p>
+                <button class="btn-primary">Xem chi tiết</button>
+            </div>
+            <div class="product-card">
+                <img src="images/product4.jpg" alt="Áo khoác">
+                <h3>Áo khoác</h3>
+                <p class="price">599.000₫</p>
+                <button class="btn-primary">Xem chi tiết</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="reviews-section">
+        <h2>⭐ Đánh giá từ khách hàng</h2>
+        <div class="review-item">
+            <div class="reviewer-info">
+                <strong>Nguyễn Văn A</strong>
+                <div class="review-stars">★★★★★</div>
+                <small>2 ngày trước</small>
+            </div>
+            <p class="review-text">Sản phẩm rất tốt, chất lượng đúng như mô tả. Giao hàng nhanh, đóng gói kĩ càng. Rất hài lòng!</p>
+        </div>
+        
+        <div class="review-item">
+            <div class="reviewer-info">
+                <strong>Trần Thị B</strong>
+                <div class="review-stars">★★★★☆</div>
+                <small>1 tuần trước</small>
+            </div>
+            <p class="review-text">Rất đẹp, mặc thoải mái. Giá cả hợp lý. Sẽ mua lại.</p>
+        </div>
+
+        <div class="review-item">
+            <div class="reviewer-info">
+                <strong>Lê Văn C</strong>
+                <div class="review-stars">★★★★★</div>
+                <small>2 tuần trước</small>
+            </div>
+            <p class="review-text">Giao nhanh, áo rất chất, không phai màu. Tuyệt vời!</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    © 2026 - Shop HTML cơ bản
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+    // Sample product data
+    const products = {
+        'ao-thun-nam': {
+            name: 'Áo thun nam',
+            price: '199.000',
+            originalPrice: '249.000',
+            image: 'images/product1.jpg',
+            description: 'Áo thun nam cao cấp, làm từ cotton 100% mềm mại và thoải mái. Phù hợp mặc hàng ngày hoặc dự tiệc. Nhiều màu sắc lựa chọn.',
+            details: [
+                '<strong>Chất liệu:</strong> Cotton 100%',
+                '<strong>Kích cỡ:</strong> XS, S, M, L, XL, XXL',
+                '<strong>Màu sắc:</strong> Đen, Trắng, Xanh, Đỏ',
+                '<strong>Bảo hành:</strong> 12 tháng',
+                '<strong>Giao hàng:</strong> Miễn phí toàn quốc'
+            ]
+        },
+        'quan-jean': {
+            name: 'Quần jean',
+            price: '299.000',
+            originalPrice: '349.000',
+            image: 'images/product2.jpg',
+            description: 'Quần jean nam phong cách, vải denim chất lượng cao. Thoải mái, bền và thời trang cho các hoạt động hàng ngày.',
+            details: [
+                '<strong>Chất liệu:</strong> Denim 98% cotton, 2% spandex',
+                '<strong>Kích cỡ:</strong> 28-40',
+                '<strong>Màu sắc:</strong> Xanh nhạt, Xanh đậm, Đen',
+                '<strong>Bảo hành:</strong> 6 tháng',
+                '<strong>Giao hàng:</strong> Miễn phí toàn quốc'
+            ]
+        },
+        'giay-the-thao': {
+            name: 'Giày thể thao',
+            price: '499.000',
+            originalPrice: '599.000',
+            image: 'images/product3.jpg',
+            description: 'Giày thể thao cao cấp với công nghệ đệm hỗ trợ. Nhẹ, thoáng khí, phù hợp chạy bộ, tập luyện và mặc hàng ngày.',
+            details: [
+                '<strong>Chất liệu:</strong> Mesh + Rubber',
+                '<strong>Kích cỡ:</strong> 35-45',
+                '<strong>Màu sắc:</strong> Trắng, Đen, Xanh, Đỏ',
+                '<strong>Bảo hành:</strong> 12 tháng',
+                '<strong>Giao hàng:</strong> Miễn phí toàn quốc'
+            ]
+        },
+        'ao-khoac': {
+            name: 'Áo khoác',
+            price: '599.000',
+            originalPrice: '749.000',
+            image: 'images/product4.jpg',
+            description: 'Áo khoác thời trang, chống nước và gió. Thiết kế hiện đại, phù hợp tất cả mùa, đặc biệt mùa thu đông.',
+            details: [
+                '<strong>Chất liệu:</strong> 100% Polyester + lớp lót fleece',
+                '<strong>Kích cỡ:</strong> XS, S, M, L, XL, XXL',
+                '<strong>Màu sắc:</strong> Đen, Xanh, Xám, Be',
+                '<strong>Bảo hành:</strong> 12 tháng',
+                '<strong>Giao hàng:</strong> Miễn phí toàn quốc'
+            ]
+        }
+    };
+
+    // Get product from URL parameter
+    function getProductFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('product') || 'ao-thun-nam';
+    }
+
+    // Load product details
+    function loadProductDetail() {
+        const productKey = getProductFromURL();
+        const product = products[productKey];
+
+        if (product) {
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-price').textContent = product.price + '₫';
+            document.getElementById('product-desc').textContent = product.description;
+            document.getElementById('breadcrumb-name').textContent = product.name;
+            document.querySelector('.original-price').textContent = product.originalPrice + '₫';
+
+            // Update details list
+            const detailsList = document.getElementById('product-details-list');
+            detailsList.innerHTML = product.details.map(detail => `<li>${detail}</li>`).join('');
+        }
+    }
+
+    // Quantity control
+    document.getElementById('qty-plus').addEventListener('click', function() {
+        const input = document.getElementById('qty-input');
+        input.value = parseInt(input.value) + 1;
+    });
+
+    document.getElementById('qty-minus').addEventListener('click', function() {
+        const input = document.getElementById('qty-input');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    });
+
+    // Size selection
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Color selection
+    document.querySelectorAll('.color-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Add to cart
+    document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+        const productKey = getProductFromURL();
+        const product = products[productKey];
+        const quantity = document.getElementById('qty-input').value;
+        const size = document.querySelector('.size-btn.active').dataset.size;
+        const color = document.querySelector('.color-btn.active').title;
+        
+        // Get cart from localStorage
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        
+        // Check if product already exists in cart
+        const existingItem = cart.find(item => 
+            item.productKey === productKey && item.size === size && item.color === color
+        );
+
+        if (existingItem) {
+            existingItem.quantity += parseInt(quantity);
+        } else {
+            cart.push({
+                productKey: productKey,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                size: size,
+                color: color,
+                quantity: parseInt(quantity)
+            });
+        }
+
+        // Save to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartBadge();
+
+        alert(`✅ Đã thêm ${quantity} x ${product.name} (Size: ${size}, Màu: ${color}) vào giỏ hàng!`);
+    });
+
+    // Update cart badge
+    function updateCartBadge() {
+        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badgeEl = document.getElementById('cart-count');
+        
+        if (totalItems > 0) {
+            badgeEl.style.display = 'inline';
+            badgeEl.textContent = totalItems;
+        } else {
+            badgeEl.style.display = 'none';
+        }
+    }
+
+    // Load cart on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        loadProductDetail();
+        updateCartBadge();
+    });
+</script>
+</body>
+</html>

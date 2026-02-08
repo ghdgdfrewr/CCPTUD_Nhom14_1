@@ -18,6 +18,10 @@
                 🛒 Giỏ hàng
                 <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
+            <div style="position: relative;">
+                <button id="authBtn" class="nav-link" onclick="toggleAuthMenu()" style="border: none; cursor: pointer; background: none;">🔑 Đăng nhập</button>
+                <div id="authMenu" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 5px; z-index: 100;"></div>
+            </div>
         </nav>
     </div>
 </header>
@@ -107,7 +111,7 @@
 
             <div class="product-actions">
                 <button class="btn-danger" id="add-to-cart-btn">🛒 Thêm vào giỏ hàng</button>
-                <button class="btn-secondary">❤️ Yêu thích</button>
+                <button class="btn-secondary favorite-btn" id="favorite-btn" data-product-id="" onclick="toggleFavoritePage(event)">🤍 Yêu thích</button>
             </div>
 
             <div class="product-benefits">
@@ -286,6 +290,20 @@
             // Update details list
             const detailsList = document.getElementById('product-details-list');
             detailsList.innerHTML = product.details.map(detail => `<li>${detail}</li>`).join('');
+
+            // Set product ID for favorite button
+            const favoriteBtn = document.getElementById('favorite-btn');
+            favoriteBtn.dataset.productId = productKey;
+            
+            // Update favorite button display
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (favorites.includes(productKey)) {
+                favoriteBtn.classList.add('is-favorite');
+                favoriteBtn.textContent = '❤️ Yêu thích';
+            } else {
+                favoriteBtn.classList.remove('is-favorite');
+                favoriteBtn.textContent = '🤍 Yêu thích';
+            }
         }
     }
 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Shop Online</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>🛒 Shop Online</h1>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">🏠 Trang chủ</a>
+            <a href="about.html" class="nav-link">ℹ️ Giới thiệu</a>
+            <a href="order.html" class="nav-link">
+                🛒 Giỏ hàng
+                <span id="cart-count" class="cart-badge" style="display: none;">0</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main class="login-container">
+    <div class="login-box">
+        <h1>🔐 Đăng Nhập / Đăng Ký</h1>
+        
+        <div class="login-tabs">
+            <button class="tab-button active" onclick="switchTab('login')">Đăng Nhập</button>
+            <button class="tab-button" onclick="switchTab('signup')">Đăng Ký</button>
+        </div>
+
+        <div id="login-tab" class="tab-content active">
+            <form onsubmit="event.preventDefault(); login()">
+                <div class="form-group">
+                    <label for="login-email">📧 Email:</label>
+                    <input type="email" id="login-email" placeholder="nhập email của bạn" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">🔒 Mật khẩu:</label>
+                    <input type="password" id="login-password" placeholder="nhập mật khẩu" required>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">
+                    Đăng Nhập
+                </button>
+            </form>
+
+            <p class="form-help">Bạn chưa có tài khoản? <a href="#" onclick="switchTab('signup'); return false;">Đăng ký ngay</a></p>
+        </div>
+
+        <div id="signup-tab" class="tab-content">
+            <form onsubmit="event.preventDefault(); signup()">
+                <div class="form-group">
+                    <label for="signup-email">📧 Email:</label>
+                    <input type="email" id="signup-email" placeholder="nhập email của bạn" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">🔒 Mật khẩu:</label>
+                    <input type="password" id="signup-password" placeholder="nhập mật khẩu (tối thiểu 6 ký tự)" required minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-confirm">✓ Xác nhận mật khẩu:</label>
+                    <input type="password" id="signup-confirm" placeholder="xác nhận mật khẩu" required minlength="6">
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">
+                    Đăng Ký
+                </button>
+            </form>
+
+            <p class="form-help">Bạn đã có tài khoản? <a href="#" onclick="switchTab('login'); return false;">Đăng nhập</a></p>
+        </div>
+    </div>
+
+    <div class="login-benefits">
+        <h2>✨ Lợi ích khi đăng nhập:</h2>
+        <ul>
+            <li>✓ Quản lý tài khoản và lịch sử mua hàng</li>
+            <li>✓ Lưu sản phẩm yêu thích</li>
+            <li>✓ Nhận ưu đãi và khuyến mãi đặc biệt</li>
+            <li>✓ Thanh toán nhanh hơn</li>
+            <li>✓ Theo dõi đơn hàng dễ dàng</li>
+        </ul>
+    </div>
+</main>
+
+<footer>
+    © 2026 - Shop HTML cơ bản
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+    function switchTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Show selected tab
+        if (tabName === 'login') {
+            document.getElementById('login-tab').classList.add('active');
+            document.querySelectorAll('.tab-button')[0].classList.add('active');
+            // Copy email from signup if exists
+            const signupEmail = document.getElementById('signup-email').value;
+            if (signupEmail) document.getElementById('login-email').value = signupEmail;
+        } else {
+            document.getElementById('signup-tab').classList.add('active');
+            document.querySelectorAll('.tab-button')[1].classList.add('active');
+            // Copy email from login if exists
+            const loginEmail = document.getElementById('login-email').value;
+            if (loginEmail) document.getElementById('signup-email').value = loginEmail;
+        }
+    }
+
+    function login() {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        if (!email || !password) {
+            alert('Vui lòng nhập email và mật khẩu!');
+            return;
+        }
+
+        if (!email.includes('@')) {
+            alert('Email không hợp lệ!');
+            return;
+        }
+
+        const user = {
+            email: email,
+            name: email.split('@')[0],
+            loginTime: new Date().toLocaleString('vi-VN')
+        };
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        alert('Đăng nhập thành công! Xin chào ' + user.name);
+        window.location.href = 'index.html';
+    }
+
+    function signup() {
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const confirm = document.getElementById('signup-confirm').value;
+
+        if (!email || !password || !confirm) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return;
+        }
+
+        if (!email.includes('@')) {
+            alert('Email không hợp lệ!');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Mật khẩu phải có ít nhất 6 ký tự!');
+            return;
+        }
+
+        if (password !== confirm) {
+            alert('Mật khẩu không khớp!');
+            return;
+        }
+
+        const user = {
+            email: email,
+            name: email.split('@')[0],
+            loginTime: new Date().toLocaleString('vi-VN')
+        };
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        alert('Đăng ký thành công! Xin chào ' + user.name);
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>

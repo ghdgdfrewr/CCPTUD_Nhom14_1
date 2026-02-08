@@ -18,6 +18,10 @@
                 🛒 Giỏ hàng
                 <span id="cart-count" class="cart-badge" style="display: none;">0</span>
             </a>
+            <div style="position: relative;">
+                <button id="authBtn" class="nav-link" onclick="toggleAuthMenu()" style="border: none; cursor: pointer; background: none;">🔑 Đăng nhập</button>
+                <div id="authMenu" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 5px; z-index: 100;"></div>
+            </div>
         </nav>
     </div>
     <p>Bán hàng đơn giản bằng HTML</p>
@@ -25,7 +29,10 @@
 
 <main class="product-list">
     <div class="product">
-        <img src="images/product1.jpg" alt="Áo thun nam">
+        <div class="product-header">
+            <img src="images/product1.jpg" alt="Áo thun nam">
+            <button class="favorite-btn" data-product-id="ao-thun-nam" onclick="toggleFavorite('ao-thun-nam', event)">🤍</button>
+        </div>
         <h3>Áo thun nam</h3>
         <p class="price">199.000₫</p>
         <div style="display: flex; gap: 10px; margin: 0 15px 15px;">
@@ -35,7 +42,10 @@
     </div>
 
     <div class="product">
-        <img src="images/product2.jpg" alt="Quần jean">
+        <div class="product-header">
+            <img src="images/product2.jpg" alt="Quần jean">
+            <button class="favorite-btn" data-product-id="quan-jean" onclick="toggleFavorite('quan-jean', event)">🤍</button>
+        </div>
         <h3>Quần jean</h3>
         <p class="price">299.000₫</p>
         <div style="display: flex; gap: 10px; margin: 0 15px 15px;">
@@ -45,7 +55,10 @@
     </div>
 
     <div class="product">
-        <img src="images/product3.jpg" alt="Giày thể thao">
+        <div class="product-header">
+            <img src="images/product3.jpg" alt="Giày thể thao">
+            <button class="favorite-btn" data-product-id="giay-the-thao" onclick="toggleFavorite('giay-the-thao', event)">🤍</button>
+        </div>
         <h3>Giày thể thao</h3>
         <p class="price">499.000₫</p>
         <div style="display: flex; gap: 10px; margin: 0 15px 15px;">
@@ -55,7 +68,10 @@
     </div>
 
     <div class="product">
-        <img src="images/product4.jpg" alt="Áo khoác">
+        <div class="product-header">
+            <img src="images/product4.jpg" alt="Áo khoác">
+            <button class="favorite-btn" data-product-id="ao-khoac" onclick="toggleFavorite('ao-khoac', event)">🤍</button>
+        </div>
         <h3>Áo khoác</h3>
         <p class="price">599.000₫</p>
         <div style="display: flex; gap: 10px; margin: 0 15px 15px;">
@@ -69,40 +85,65 @@
     © 2026 - Shop HTML cơ bản
 </footer>
 
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLoginModal()">&times;</span>
+        <h2>🔐 Đăng Nhập / Đăng Ký</h2>
+        
+        <div class="modal-tabs">
+            <button class="modal-tab-button active" onclick="switchModalTab('login')">Đăng Nhập</button>
+            <button class="modal-tab-button" onclick="switchModalTab('signup')">Đăng Ký</button>
+        </div>
+
+        <div id="modal-login-tab" class="modal-tab-content active">
+            <form onsubmit="event.preventDefault(); login()">
+                <div class="form-group">
+                    <label>📧 Email:</label>
+                    <input type="email" id="loginEmail" placeholder="nhập email" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Mật khẩu:</label>
+                    <input type="password" id="loginPassword" placeholder="nhập mật khẩu" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 10px;">Đăng Nhập</button>
+            </form>
+        </div>
+
+        <div id="modal-signup-tab" class="modal-tab-content">
+            <form onsubmit="event.preventDefault(); signup()">
+                <div class="form-group">
+                    <label>📧 Email:</label>
+                    <input type="email" id="signupEmail" placeholder="nhập email" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Mật khẩu:</label>
+                    <input type="password" id="signupPassword" placeholder="nhập mật khẩu (tối thiểu 6 ký tự)" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>✓ Xác nhận mật khẩu:</label>
+                    <input type="password" id="signupConfirm" placeholder="xác nhận mật khẩu" required minlength="6">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 10px;">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="js/script.js"></script>
 <script>
-    // Update cart badge on page load
-    function updateCartBadge() {
-        const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const badgeEl = document.getElementById('cart-count');
+    function switchModalTab(tab) {
+        document.querySelectorAll('.modal-tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.modal-tab-button').forEach(b => b.classList.remove('active'));
         
-        if (totalItems > 0) {
-            badgeEl.style.display = 'inline';
-            badgeEl.textContent = totalItems;
+        if (tab === 'login') {
+            document.getElementById('modal-login-tab').classList.add('active');
+            document.querySelectorAll('.modal-tab-button')[0].classList.add('active');
         } else {
-            badgeEl.style.display = 'none';
+            document.getElementById('modal-signup-tab').classList.add('active');
+            document.querySelectorAll('.modal-tab-button')[1].classList.add('active');
         }
     }
-
-    // Product mapping for navigation
-    const productMap = {
-        'Áo thun nam': 'ao-thun-nam',
-        'Quần jean': 'quan-jean',
-        'Giày thể thao': 'giay-the-thao',
-        'Áo khoác': 'ao-khoac'
-    };
-
-    // Navigate to product detail when "Thêm vào giỏ" is clicked
-    function addToCart(productName) {
-        const productKey = productMap[productName];
-        if (productKey) {
-            window.location.href = `product-detail.html?product=${productKey}`;
-        }
-    }
-
-    // Update badge on load
-    window.addEventListener('DOMContentLoaded', updateCartBadge);
 </script>
 </body>
 </html>
